@@ -1,15 +1,8 @@
 package refactoring;
 
-public class RegularMoviePriceCalculationStrategy {
-  
-  public RegularMoviePriceCalculationStrategy() {
+public class RegularMoviePriceCalculationStrategy extends PriceCalculationStrategy {
 
-  }
-  
-  public RegularMoviePriceCalculationStrategy(String title) {
-
-  }
-
+  @Override
   public double getAmount(int _daysRented) {
     double thisAmount = 2;
     if (_daysRented > 2) {
@@ -17,5 +10,5 @@ public class RegularMoviePriceCalculationStrategy {
     }
     return thisAmount;
   }
-  
+
 }

@@ -33,8 +33,8 @@ public class PrintOutXML {
         try {
           Movie movie = rental.getMovie();
           xmlStreamWriter.writeStartElement(movie.getTitle().replaceAll("\\s", ""));
-          xmlStreamWriter.writeAttribute("bonusPoints", movie.getBonusPoints(2) + "");
-          xmlStreamWriter.writeAttribute("fees", movie.getAmount(2) * 1.00 + "");
+          xmlStreamWriter.writeAttribute("frequentPoints", rental.getPoints() + "");
+          // xmlStreamWriter.writeAttribute("fees", rental.getAmount(2) * 1.00 + "");
 
         } catch (XMLStreamException e) {
           e.printStackTrace();

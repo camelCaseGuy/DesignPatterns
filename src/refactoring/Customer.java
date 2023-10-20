@@ -40,7 +40,7 @@ public class Customer {
 
     for (Rental rental : _rentals) {
       this._totalAmount += rental.getAmount();
-      this._frequentRenterPoints += rental.getRentalPoints(); // updateFrequentRenterPoints method in Rental
+      this._frequentRenterPoints += rental.getPoints(); // updateFrequentRenterPoints method in Rental
       System.out.println(_totalAmount);
       System.out.println(_frequentRenterPoints);
     }

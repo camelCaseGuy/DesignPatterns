@@ -4,28 +4,44 @@ public class Rental {
   private Movie _movie;
   private int _daysRented;
   private int _frequentRentalPoints;
-  private PriceCalculationStrategy _strategy;
-  // BASE_PRICE, BASE_POINTS
-
-  public Rental(PriceCalculationStrategy strategy, int daysRented) {
-    _strategy = strategy;
-    _daysRented = daysRented;
-  }
+  private PriceCalculationStrategy _priceStrategy;
+  private PointsCalculationStrategy _pointsStrategy;
 
   public Rental(Movie movie, int daysRented) {
-    _movie = movie;
     _daysRented = daysRented;
+    _movie = movie;
+    setPriceCalculationStrategy(movie);
   }
 
-  public Rental(PriceCalculationStrategy priceCalculationStrategy, 
-  Movie movie, int daysRented) {
-    _daysRented = daysRented;
-    _strategy = priceCalculationStrategy;
-    _movie = movie;
+  private void setPriceCalculationStrategy(Movie movie) {
+    switch (movie.getType()) {
+      case "regular":
+        _priceStrategy = new RegularMoviePriceCalculationStrategy();
+        _pointsStrategy = new RegularMoviePointsCalculationStrategy();
+        break;
+        
+        case "childrens":
+        _priceStrategy = new ChildrensPriceCalculationStrategy();
+        _pointsStrategy = new ChildrensPointsCalculationStrategy();
+        break;
+        
+        case "newRelease":
+        _priceStrategy = new NewReleasePriceCalculationStrategy();
+        _pointsStrategy = new NewReleasePointsCalculationStrategy();
+        
+        default:
+        _priceStrategy = new PriceCalculationStrategy();
+        _pointsStrategy = new PointsCalculationStrategy();
+        break;
+    }
   }
 
-  public PriceCalculationStrategy getPriceCalculationStrategy() {
-    return _strategy;
+  public PriceCalculationStrategy setPriceCalculationStrategy() {
+    return _priceStrategy;
+  }
+
+  public PointsCalculationStrategy getPointsStrategy() {
+    return _pointsStrategy;
   }
 
   public int getDaysRented() {
@@ -37,14 +53,14 @@ public class Rental {
   }
 
   public double getAmount() {
-    return _strategy.getAmount(_movie._type, _daysRented);
-
+    return _priceStrategy.getAmount(_daysRented);
   }
 
-  public int getRentalPoints() {
-    _frequentRentalPoints++;
-    int getBonusPoints = _movie.getBonusPoints(_daysRented);
-    _frequentRentalPoints += getBonusPoints;
-    return _frequentRentalPoints;
+  public int getPoints() {
+    return _pointsStrategy.getPoints();
   }
+
+  // public String getBonusPoints(int i) {
+  //   return null;
+  // }
 }
