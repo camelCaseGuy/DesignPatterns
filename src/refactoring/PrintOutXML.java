@@ -27,14 +27,14 @@ public class PrintOutXML {
 
       xmlStreamWriter.writeStartElement(customer.getName());
       xmlStreamWriter.writeAttribute("totalAmount", customer.getTotalAmount() + "");
-      xmlStreamWriter.writeAttribute("totalPoints", customer.getFrequentRenterPoints() + "");
+      xmlStreamWriter.writeAttribute("totalPoints", customer.getPoints() + "");
 
       customer.getRentals().forEach(rental -> {
         try {
           Movie movie = rental.getMovie();
           xmlStreamWriter.writeStartElement(movie.getTitle().replaceAll("\\s", ""));
-          xmlStreamWriter.writeAttribute("frequentPoints", rental.getPoints() + "");
-          // xmlStreamWriter.writeAttribute("fees", rental.getAmount(2) * 1.00 + "");
+          xmlStreamWriter.writeAttribute("feeAmounts", rental.getAmount() + "");
+          xmlStreamWriter.writeAttribute("points", rental.getPoints() + "");
 
         } catch (XMLStreamException e) {
           e.printStackTrace();

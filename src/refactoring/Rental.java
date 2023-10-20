@@ -3,17 +3,17 @@ package refactoring;
 public class Rental {
   private Movie _movie;
   private int _daysRented;
-  private int _frequentRentalPoints;
   private PriceCalculationStrategy _priceStrategy;
   private PointsCalculationStrategy _pointsStrategy;
 
   public Rental(Movie movie, int daysRented) {
     _daysRented = daysRented;
     _movie = movie;
-    setPriceCalculationStrategy(movie);
+    setStrategies(movie);
+    _pointsStrategy.setPoints(daysRented);
   }
 
-  private void setPriceCalculationStrategy(Movie movie) {
+  private void setStrategies(Movie movie) {
     switch (movie.getType()) {
       case "regular":
         _priceStrategy = new RegularMoviePriceCalculationStrategy();
@@ -36,7 +36,7 @@ public class Rental {
     }
   }
 
-  public PriceCalculationStrategy setPriceCalculationStrategy() {
+  public PriceCalculationStrategy setStrategies() {
     return _priceStrategy;
   }
 
@@ -60,7 +60,4 @@ public class Rental {
     return _pointsStrategy.getPoints();
   }
 
-  // public String getBonusPoints(int i) {
-  //   return null;
-  // }
 }

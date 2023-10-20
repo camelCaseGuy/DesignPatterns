@@ -10,7 +10,7 @@ public class Customer {
   private String _name;
   private ArrayList<Rental> _rentals = new ArrayList<Rental>();
   private double _totalAmount;
-  private int _frequentRenterPoints;
+  private int _points;
 
   public Customer(String name) {
     _name = name;
@@ -32,17 +32,17 @@ public class Customer {
     return _totalAmount;
   }
 
-  public int getFrequentRenterPoints() {
-    return _frequentRenterPoints;
+  public int getPoints() {
+    return _points;
   }
 
   public void calculateAmountAndPoints() {
 
     for (Rental rental : _rentals) {
       this._totalAmount += rental.getAmount();
-      this._frequentRenterPoints += rental.getPoints(); // updateFrequentRenterPoints method in Rental
+      this._points += rental.getPoints(); // updatePoints method in Rental
       System.out.println(_totalAmount);
-      System.out.println(_frequentRenterPoints);
+      System.out.println(_points);
     }
   }
 
@@ -59,21 +59,4 @@ public class Customer {
     }
   }
 
-  // public static void main(String[] args) {
-  //   Customer greg = new Customer("Greg");
-  //   Movie titanicMovie = new Movie("Titanic");
-  //   Movie careBearsMovie = new ChildrensMovie("Care Bears");
-  //   Movie oppenheimerMovie = new NewReleaseMovie("Oppenheimer");
-  //   Movie someMovie = new Movie("A Movie");
-  //   Rental titanicRental = new Rental(titanicMovie, 3);
-  //   Rental careBearsRental = new Rental(careBearsMovie, 1);
-  //   Rental oppenheimerRental = new Rental(oppenheimerMovie, 5);
-  //   Rental somRental = new Rental(someMovie, 4);
-  //   greg.addRental(titanicRental);
-  //   greg.addRental(careBearsRental);
-  //   greg.addRental(oppenheimerRental);
-  //   greg.addRental(somRental);
-  //   greg.calculateAmountAndPoints();
-  //   greg.printStatement(greg);
-  // }
 }
