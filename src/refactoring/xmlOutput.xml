@@ -1,6 +1,1 @@
-<Greg totalAmount="11.0" totalPoints="12">
-    <Titanic points="3" fees="3.5"></Titanic>
-    <CareBears points="3" fees="1.5"></CareBears>
-    <Oppenheimer points="3" fees="3.0"></Oppenheimer>
-    <AMovie points="3" fees="3.0"></AMovie>
-</Greg>
+<Greg totalAmount="11.0" totalPoints="12"><Titanic feeAmounts="3.5" points="3"></Titanic><CareBears feeAmounts="1.5" points="3"></CareBears><Oppenheimer feeAmounts="3.0" points="3"></Oppenheimer><AMovie feeAmounts="3.0" points="3"></AMovie></Greg>
