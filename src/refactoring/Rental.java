@@ -5,35 +5,16 @@ public class Rental {
   private int _daysRented;
   private PriceCalculationStrategy _priceStrategy;
   private PointsCalculationStrategy _pointsStrategy;
+  private PriceCalculationFactory _priceFactory;
+  private PointsCalculationFactory _pointsFactory;
 
   public Rental(Movie movie, int daysRented) {
     _daysRented = daysRented;
     _movie = movie;
-    setStrategies(movie);
-    _pointsStrategy.setPoints(daysRented);
-  }
-
-  private void setStrategies(Movie movie) {
-    switch (movie.getType()) {
-      case "regular":
-        _priceStrategy = new RegularMoviePriceCalculationStrategy();
-        _pointsStrategy = new RegularMoviePointsCalculationStrategy();
-        break;
-        
-        case "childrens":
-        _priceStrategy = new ChildrensPriceCalculationStrategy();
-        _pointsStrategy = new ChildrensPointsCalculationStrategy();
-        break;
-        
-        case "newRelease":
-        _priceStrategy = new NewReleasePriceCalculationStrategy();
-        _pointsStrategy = new NewReleasePointsCalculationStrategy();
-        
-        default:
-        _priceStrategy = new PriceCalculationStrategy();
-        _pointsStrategy = new PointsCalculationStrategy();
-        break;
-    }
+    _priceFactory = new PriceCalculationFactory();
+    _priceStrategy = _priceFactory.setStrategies(movie);
+    _pointsFactory = new PointsCalculationFactory(daysRented);
+    _pointsStrategy = _pointsFactory.setStrategies(movie);
   }
 
   public PriceCalculationStrategy setStrategies() {

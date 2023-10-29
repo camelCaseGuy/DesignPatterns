@@ -3,8 +3,11 @@ package refactoring;
 public class PointsCalculationStrategy {
     private int _points;
 
-    PointsCalculationStrategy() {
+    PointsCalculationStrategy(int _daysRented) {
+        setPoints(_daysRented);
+    }
 
+    public PointsCalculationStrategy() {
     }
 
     public int getPoints() {
