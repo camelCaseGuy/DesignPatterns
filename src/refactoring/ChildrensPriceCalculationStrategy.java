@@ -7,11 +7,14 @@ public class ChildrensPriceCalculationStrategy extends PriceCalculationStrategy 
   }
 
   @Override
-  public double getAmount(int _daysRented) {
+  public double getAmount(double movieAmount, int daysRented) {
     double thisAmount = 1.5;
-    if (_daysRented > 3) {
-        thisAmount += (_daysRented - 3) * 1.5;
+    if (daysRented > 3) {
+        thisAmount += (daysRented - 3) * 1.5;
     }
     return thisAmount;
   }
 }
+
+
+

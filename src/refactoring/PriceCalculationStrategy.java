@@ -7,8 +7,8 @@ public class PriceCalculationStrategy {
 
   }
 
-  public double getAmount(int _daysRented) {
-    return _daysRented * 1;
+  public double getAmount(double movieAmount, int _daysRented) {
+    return _daysRented * 1 * movieAmount;
   }
 
 }

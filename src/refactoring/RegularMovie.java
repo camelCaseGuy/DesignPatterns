@@ -19,14 +19,14 @@ public class RegularMovie {
 
   }
 
-  public double getAmount(int _daysRented) {
-    return _regularMoviePriceCalculationStrategy.getAmount(_daysRented);
+  public double getAmount(double movieAmount, int _daysRented) {
+    
+    
+    if (_daysRented > 2) {
+      movieAmount += (_daysRented - 2) * 1.5;
+    }
 
-    // double thisAmount = 2;
-    // if (_daysRented > 2) {
-    //   thisAmount += (_daysRented - 2) * 1.5;
-    // }
-    // return thisAmount;
+    return _regularMoviePriceCalculationStrategy.getAmount(movieAmount, _daysRented);
   }
 
   // public double getAmount() {

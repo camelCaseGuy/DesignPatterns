@@ -9,7 +9,6 @@ public class Main {
         Movie oppenheimerMovie = new Movie("Oppenheimer");
         Movie someMovie = new Movie("A Movie");
         Rental titanicRental = new Rental(titanicMovie, 2);
-        // double amount = titanicRental.getAmount();
         Rental careBearsRental = new Rental(careBearsMovie, 4);
         Rental oppenheimerRental = new Rental(oppenheimerMovie, 3);
         Rental someRental = new Rental(someMovie, 5);
@@ -17,7 +16,6 @@ public class Main {
         greg.addRental(careBearsRental);
         greg.addRental(oppenheimerRental);
         greg.addRental(someRental);
-        greg.calculateAmountAndPoints();
-        greg.printStatement(greg);
+        System.out.println(greg.customerStatement());
       }
 }

@@ -16,8 +16,8 @@ public class Customer {
     _name = name;
   }
 
-  public void addRental(Rental rental) {
-    _rentals.add(rental);
+  public void addRental(Rental careBearsRental) {
+    _rentals.add((Rental) careBearsRental);
   }
 
   public String getName() {
@@ -36,27 +36,55 @@ public class Customer {
     return _points;
   }
 
-  public void calculateAmountAndPoints() {
+  // public void calculateAmountAndPoints() {
+
+  // for (Rental rental : _rentals) {
+  // this._totalAmount += rental.getAmount();
+  // this._points += rental.getPoints(); // updatePoints method in Rental
+  // System.out.println(_totalAmount);
+  // System.out.println(_points);
+  // }
+  // }
+
+  // public void printStatement(Customer customer) {
+  // try {
+  // PrintOutXML.print(customer);
+  // } catch (FileNotFoundException e) {
+  // e.printStackTrace();
+  // } catch (UnsupportedEncodingException e) {
+  // e.printStackTrace();
+  // } catch (XMLStreamException e) {
+  // System.err.println(e);
+  // e.printStackTrace();
+  // }
+  // }
+
+  public String customerStatement() {
+    String movieInfo = "";
 
     for (Rental rental : _rentals) {
-      this._totalAmount += rental.getAmount();
-      this._points += rental.getPoints(); // updatePoints method in Rental
-      System.out.println(_totalAmount);
-      System.out.println(_points);
+      double thisMovieCharge = 0;
+
+      if (rental.isFreeMovie(_points) && _points >= 10) {
+        _points = _points - 10;
+      } else {
+        thisMovieCharge = rental.calculateRentalAmount(thisMovieCharge);
+        _points = rental.getPoints();
+      }
+
+      movieInfo += "\t<Movie>\n\t\t<Title>" + rental.getMovie().getTitle() + "</Title>\n\t\t<Price>"
+          + thisMovieCharge + "</Price>\n\t\t<Duration>" + rental.getDaysRented()
+          + "</Duration>\n\t</Movie>\n";
+      _totalAmount += thisMovieCharge;
     }
+
+    return printXML(movieInfo, _totalAmount);
   }
 
-  public void printStatement(Customer customer) {
-    try {
-      PrintOutXML.print(customer);
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
-    } catch (UnsupportedEncodingException e) {
-      e.printStackTrace();
-    } catch (XMLStreamException e) {
-      System.err.println(e);
-      e.printStackTrace();
-    }
-  }
+  public String printXML(String movieData, double amountDue) {
+    String xmlString = "<Record>\n\t<Name>" + getName() + "</Name>\n" + movieData + "\t<AmountDue>" + amountDue
+        + "</AmountDue>\n" + "\t<RentalPoints>" + _points + "</RentalPoints>\n</Record>";
 
+    return xmlString;
+  }
 }
