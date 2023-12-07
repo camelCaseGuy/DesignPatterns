@@ -1,10 +1,11 @@
 package refactoring;
 
-import java.io.FileNotFoundException;
-import java.io.UnsupportedEncodingException;
+// import java.io.FileNotFoundException;
+// import java.io.UnsupportedEncodingException;
+// import javax.xml.stream.XMLStreamException;
+
 import java.util.ArrayList;
 
-import javax.xml.stream.XMLStreamException;
 
 public class Customer {
   private String _name;
